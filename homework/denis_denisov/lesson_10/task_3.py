@@ -21,8 +21,6 @@ def calc(first, second, operation):
 
 
 def calc(first, second, operation):
-
-
     if operation == '+':
         return first + second
     elif operation == '-':
@@ -34,8 +32,6 @@ def calc(first, second, operation):
 
 
 def operation_decorator(func):
-
-
     def wrapper(first, second):
 
         if first == second:
@@ -52,8 +48,6 @@ def operation_decorator(func):
 
 @operation_decorator
 def calc_with_decorator(first, second, operation):
-
-
     return calc(first, second, operation)
 
 
