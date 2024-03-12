@@ -19,7 +19,10 @@ def calc(first, second, operation):
 
 """
 
+
 def calc(first, second, operation):
+
+
     if operation == '+':
         return first + second
     elif operation == '-':
@@ -29,8 +32,12 @@ def calc(first, second, operation):
     elif operation == '/':
         return first / second
 
+
 def operation_decorator(func):
+
+
     def wrapper(first, second):
+
         if first == second:
             return func(first, second, '+')
         elif first > second:
@@ -39,11 +46,16 @@ def operation_decorator(func):
             return func(first, second, '/')
         elif first < 0 or second < 0:
             return func(first, second, '*')
+
     return wrapper
+
 
 @operation_decorator
 def calc_with_decorator(first, second, operation):
+
+
     return calc(first, second, operation)
+
 
 first_num = int(input("Введите первое число: "))
 second_num = int(input("Введите второе число: "))
