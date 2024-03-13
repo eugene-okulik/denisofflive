@@ -2,7 +2,7 @@
 Первый класс
 Создайте класс book с атрибутами:
 
-материал страниц
+Материал страниц
 наличие текста
 название книги
 автор
@@ -22,7 +22,7 @@ ISBN
 Второй класс
 Создайте дочерний класс для первого. Это будет класс для школьных учебников. В нем будут дополнительные атрибуты:
 
-предмет (типа математика, история, география),
+Предмет (типа математика, история, география),
 класс (школьный класс, для которого этот учебник)(осторожно с названием переменной. class - зарезервированное слово),
 наличие заданий (bool)
 Создайте несколько экземпляров учебников.
@@ -38,54 +38,59 @@ ISBN
 
 
 class Book:
-    def __init__(self, material, has_text, title, author, num_pages, isbn):
-        self.material = material
-        self.has_text = has_text
+    material = "бумага"
+    has_text = True
+
+    def __init__(self, title, author, pages, isbn, reserved=False):
         self.title = title
         self.author = author
-        self.num_pages = num_pages
+        self.pages = pages
         self.isbn = isbn
-        self.reserved = False
+        self.reserved = reserved
 
-    def print_details(self):
-        if self.reserved:
-            print(f"Название: {self.title}, Автор: {self.author}, Страниц: {self.num_pages},"
-                  f"Материал: {self.material}, Зарезервирована")
-        else:
-            print(f"Название: {self.title}, Автор: {self.author}, Страниц: {self.num_pages}, Материал: {self.material}")
+    def __str__(self):
+        status = "зарезервирована" if self.reserved else ""
+        return f"Название: {self.title}, Автор: {self.author}, страниц: {self.pages}," \
+               f"материал: {self.material}, {status}"
 
 
 class Textbook(Book):
-    def __init__(self, material, has_text, title, author, num_pages, isbn, subject, school_class):
-        super().__init__(material, has_text, title, author, num_pages, isbn)
+    def __init__(self, title, author, pages, isbn, subject, grade, exercises=False, reserved=False):
+        super().__init__(title, author, pages, isbn, reserved)
         self.subject = subject
-        self.school_class = school_class
+        self.grade = grade
+        self.exercises = exercises
+
+    def __str__(self):
+        status = "зарезервирована" if self.reserved else ""
+        return f"Название: {self.title}, Автор: {self.author}, страниц: {self.pages}," \
+               f"предмет: {self.subject}, класс: {self.grade}, {status}"
 
 
-book1 = Book("бумага", True, "Идиот", "Достоевский", 500, "978-5-17-103273-2")
-book2 = Book("хлопок", True, "Преступление и наказание", "Достоевский",
-             600, "978-5-17-084636-6")
-book3 = Book("полимер", True, "Мастер и Маргарита", "Булгаков",
-             400, "978-5-04-110889-8")
-book4 = Book("бумага", True, "Анна Каренина", "Толстой",
-             800, "978-5-17-079877-3")
-book5 = Book("бумага", False, "1984", "Оруэлл", 350, "978-5-17-082321-4")
+# Создание экземпляров книг
+book1 = Book("Идиот", "Достоевский", 500, "1234567890")
+book2 = Book("Анна Каренина", "Толстой", 800, "9876543210")
+book3 = Book("Война и мир", "Толстой", 1200, "1122334455")
+book4 = Book("Преступление и наказание", "Достоевский", 600, "6789012345")
+book5 = Book("Мастер и Маргарита", "Булгаков", 400, "5678901234")
 
-book1.reserved = True
-book1.print_details()
-book2.print_details()
-book3.print_details()
-book4.print_details()
-book5.print_details()
+# Пометка одной книги как зарезервированной
+book5.reserved = True
 
-textbook1 = Textbook("бумага", True, "Алгебра", "Иванов", 200,
-                     "978-5-17-093543-0", "Математика", 9)
-textbook2 = Textbook("бумага", True, "История", "Петров", 250,
-                     "978-5-02-031912-6", "История", 10)
-textbook3 = Textbook("полимер", False, "География", "Сидоров",
-                     180, "978-5-17-087657-8", "География", 8)
+# Печать деталей о книгах
+print("Книги:")
+for book in [book1, book2, book3, book4, book5]:
+    print(book)
 
-textbook1.reserved = True
-textbook1.print_details()
-textbook2.print_details()
-textbook3.print_details()
+# Создание экземпляров учебников
+textbook1 = Textbook("Алгебра", "Иванов", 200, "0987654321", "Математика", 9, True)
+textbook2 = Textbook("Геометрия", "Петров", 300, "1098765432", "Геометрия", 10, False)
+textbook3 = Textbook("История России", "Сидоров", 400, "1109876543", "История", 11, True)
+
+# Пометка одного учебника как зарезервированного
+textbook3.reserved = True
+
+# Печать деталей об учебниках
+print("\nУчебники:")
+for textbook in [textbook1, textbook2, textbook3]:
+    print(textbook)
