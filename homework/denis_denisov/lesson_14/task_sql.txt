@@ -1,0 +1,68 @@
+-- Создание группы
+INSERT INTO `groups` (title, start_date, end_date)
+VALUES ('QA_Auto', 'march 2024', 'september 2024')
+-- Проверка
+SELECT *
+FROM `groups`
+WHERE title = 'QA_Auto'
+
+-- Создание студента Denis Denisov
+INSERT INTO students (name, second_name, group_id)
+VALUES ('Denis', 'Denisov', 547)
+-- Проверка
+SELECT *
+FROM students
+WHERE group_id = 547
+
+# Создание книг и запись их на студента
+INSERT INTO books (title, taken_by_student_id)
+VALUES ('Программируем на Python', 608), ('Программируем на Python 2', 608)
+-- Проверка
+SELECT *
+FROM books b
+WHERE taken_by_student_id  = 608
+
+-- Создание предметов
+INSERT INTO subjets (title)
+VALUES ('Ручное тестирование'), ('Автотестирование')
+-- Проверка
+SELECT *
+FROM subjets s
+WHERE title = 'Ручное тестирование' or 'Автотестирование'
+
+-- Создание уроков
+INSERT INTO lessons (subject_id, title)
+VALUES (713, 'Урок 1 Ручное тестирование'), (713, 'Урок 2 Ручное тестирование'),
+(716, 'Урок 1 Автотестирование'), (716, 'Урок 2 Автотестирование')
+-- Проверка
+SELECT *
+FROM lessons
+WHERE subject_id IN (713, 716)
+
+-- Выставление оценок
+INSERT INTO marks (value, lesson_id, student_id)
+VALUES (5, 751, 608), (5, 752, 608), (4, 753, 608), (4, 754, 608)
+-- Проверка
+SELECT *
+FROM marks m
+WHERE student_id = 608
+
+-- Получение оценок студента Denis Denisov
+SELECT value
+FROM marks
+WHERE student_id = 608
+
+-- Получение книг записанных на студента Denis Denisov
+SELECT *
+FROM books b
+WHERE taken_by_student_id = 608
+
+-- Вывести всю информацию о студенте Denisov Denis (книги, оценки с названиями занятий и предметов, используя Join)
+SELECT *
+FROM students
+JOIN `groups` ON students.group_id = groups.id
+JOIN books ON students.id = books.taken_by_student_id
+JOIN marks ON students.id = marks.student_id
+JOIN lessons on marks.lesson_id = lessons.id
+JOIN subjets on lessons.subject_id = subjets.id
+WHERE students.id = 608
