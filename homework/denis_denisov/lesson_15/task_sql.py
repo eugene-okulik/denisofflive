@@ -9,6 +9,7 @@ db = mysql.connect(
     database='st-onl'
 )
 
+
 cursor = db.cursor(dictionary=True)
 
 # Добавление группы
