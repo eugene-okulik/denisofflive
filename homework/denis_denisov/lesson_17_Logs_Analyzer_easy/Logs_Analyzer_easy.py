@@ -15,6 +15,6 @@ def find_text_in_files(folder_path, text_to_find):
 
 
 # Пример вызова функции с указанием пути к папке с логами и текстом для поиска
-path = 'D:\denisofflive\homework\eugene_okulik\data\logs'
+path = r'D:\denisofflive\homework\eugene_okulik\data\logs'
 text = "Sql exception for geometry"
 find_text_in_files(path, text)
