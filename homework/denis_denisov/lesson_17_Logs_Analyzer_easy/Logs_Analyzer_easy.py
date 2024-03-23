@@ -1,20 +1,20 @@
+import argparse
 import os
 
+parser = argparse.ArgumentParser()
+parser.add_argument("path_folder", help="Задайте путь к папке с лог-файлами")
+parser.add_argument("--text", help="Введите текст поиска")
+args = parser.parse_args()
 
-def find_text_in_files(folder_path, text_to_find):
-    files = os.listdir(folder_path)
+files = os.listdir(args.path)
 
-    for file_name in files:
-        with open(os.path.join(folder_path, file_name)) as file:
-            lines = file.readlines()
-            for line_number, line in enumerate(lines):
-                if text_to_find in line:
-                    start = max(line.index(text_to_find) - 5, 0)
-                    end = min(line.index(text_to_find) + len(text_to_find) + 5, len(line))
-                    print(f"Найден '{text_to_find}' в файле {file_name} на строке {line_number + 1}: {line[start:end]}")
-
-
-# Пример вызова функции с указанием пути к папке с логами и текстом для поиска
-path = r'D:\denisofflive\homework\eugene_okulik\data\logs'
-text = "Sql exception for geometry"
-find_text_in_files(path, text)
+for file in files:
+    with open(os.path.join(args.path, file)) as logs:
+        for i, line in enumerate(logs):
+            if args.value in line:
+                words = line.split()
+                idx = words.index(args.value)
+                start_idx = max(idx - 5, 0)
+                end_idx = min(idx + 5, len(words))
+                context = " ".join(words[start_idx:end_idx])
+                print(f"Файл: {file}, в строке {i}: {context}")
