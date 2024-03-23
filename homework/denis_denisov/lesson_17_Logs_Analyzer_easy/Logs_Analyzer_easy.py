@@ -2,8 +2,8 @@ import argparse
 import os
 
 parser = argparse.ArgumentParser()
-parser.add_argument("path_folder", help="Задайте путь к папке с лог-файлами")
-parser.add_argument("--text", help="Введите текст поиска")
+parser.add_argument("path", help="Задайте путь к папке с лог-файлами")
+parser.add_argument("value", help="Введите текст поиска")
 args = parser.parse_args()
 
 files = os.listdir(args.path)
