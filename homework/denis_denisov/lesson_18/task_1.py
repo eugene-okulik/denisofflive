@@ -62,7 +62,6 @@ def delete_post():
     # Проверка
     assert response.status_code == 200, 'Неверный код состояния'
 
-
 # Запуск функций (методов)
 create_post()
 put_post()
