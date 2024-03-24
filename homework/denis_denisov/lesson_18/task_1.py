@@ -3,6 +3,7 @@ import requests
 # Основная ссылка
 url = 'https://api.restful-api.dev/objects'
 
+
 # Базовый метод POST - создание девайса
 def create_post():
     body = {
@@ -18,6 +19,7 @@ def create_post():
     post_id = response.json()['id']
     assert response.status_code == 200
     return post_id
+
 
 # Метод PUT - изменение девайса
 def put_post():
@@ -52,12 +54,14 @@ def patch_post():
     assert response.status_code == 200, 'Неверный код состояния'
     assert response.json()['id'] == id, 'Неверный ID'
 
+
 # Метод DELETE - удаление девайса
 def delete_post():
     id = create_post()
     response = requests.delete(url + f'/{id}')
     # Проверка
     assert response.status_code == 200, 'Неверный код состояния'
+
 
 # Запуск функций (методов)
 create_post()
